@@ -9,7 +9,7 @@
       ******************************************************************
 
        IDENTIFICATION DIVISION.
-       PROGRAM-ID. DAY1A.
+       PROGRAM-ID. DAY1B.
        AUTHOR. JELLE BESSELING.
        DATE-WRITTEN.  02/12/2023.
        ENVIRONMENT DIVISION.
@@ -134,4 +134,4 @@
            SUBTRACT 3 FROM PTR
        END-EVALUATE
        .
-       END PROGRAM DAY1A.
+       END PROGRAM DAY1B.
