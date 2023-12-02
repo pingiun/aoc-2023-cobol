@@ -24,9 +24,9 @@
        FILE SECTION.
        FD IN-FILE
            RECORD VARYING FROM 1 to 80 CHARACTERS.
-       01  IN-RECORD PIC X(80).
+       01  IN-RECORD           PIC X(80).
        WORKING-STORAGE SECTION.
-       01  ECODE         PIC 9(2).
+       01  ECODE               PIC 9(2).
        01  PTR                 PIC 9(2) VALUE ZERO.
        01  TOTAL               PIC 9(9) VALUE ZERO.
        01  DIGITS.
