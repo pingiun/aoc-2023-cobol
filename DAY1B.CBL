@@ -39,14 +39,14 @@
        LINKAGE SECTION.
        PROCEDURE DIVISION.
 
-       OPEN INPUT IN-FILE.
-       PERFORM PROCESS-LINE UNTIL ECODE = 10.
-       CLOSE IN-FILE.
+           OPEN INPUT IN-FILE.
+           PERFORM PROCESS-LINE UNTIL ECODE = 10.
+           CLOSE IN-FILE.
 
-       DISPLAY TOTAL.
-      *>    DISPLAY "COUNT: " COUNTER.
+           DISPLAY TOTAL.
+      *    DISPLAY "COUNT: " COUNTER.
 
-       GOBACK.
+           GOBACK.
 
       *> PROCESS ONE LINE AND ADD TO THE RUNNING TOTAL
        PROCESS-LINE.
@@ -65,73 +65,73 @@
        .
       *> PARSE SOMETHING AT THE CURRENT POINTER
        PROCESS-CHAR.
-       IF IN-RECORD(PTR:1) IS NUMERIC
-           IF HAVE-FIRST = 'N'
-             MOVE IN-RECORD(PTR:1) TO FIRST-NUMBER
-             MOVE IN-RECORD(PTR:1) TO SECOND-NUMBER
-             MOVE 'Y' TO HAVE-FIRST
+           IF IN-RECORD(PTR:1) IS NUMERIC
+               IF HAVE-FIRST = 'N'
+                 MOVE IN-RECORD(PTR:1) TO FIRST-NUMBER
+                 MOVE IN-RECORD(PTR:1) TO SECOND-NUMBER
+                 MOVE 'Y' TO HAVE-FIRST
+               ELSE
+                 MOVE IN-RECORD(PTR:1) TO SECOND-NUMBER
+               END-IF
            ELSE
-             MOVE IN-RECORD(PTR:1) TO SECOND-NUMBER
+               MOVE 0 TO PARSE-RET
+               PERFORM PARSE-WORD
+               IF PARSE-RET NOT = 0
+                 AND HAVE-FIRST = 'N'
+                    MOVE PARSE-RET TO FIRST-NUMBER
+                    MOVE PARSE-RET TO SECOND-NUMBER
+                    MOVE 'Y' TO HAVE-FIRST
+               ELSE IF PARSE-RET NOT = 0
+                    MOVE PARSE-RET TO SECOND-NUMBER
+               END-IF
            END-IF
-       ELSE
-           MOVE 0 TO PARSE-RET
-           PERFORM PARSE-WORD
-           IF PARSE-RET NOT = 0
-             AND HAVE-FIRST = 'N'
-                MOVE PARSE-RET TO FIRST-NUMBER
-                MOVE PARSE-RET TO SECOND-NUMBER
-                MOVE 'Y' TO HAVE-FIRST
-           ELSE IF PARSE-RET NOT = 0
-                MOVE PARSE-RET TO SECOND-NUMBER
-           END-IF
-       END-IF
        .
       *> CHECK IF THE POINTER STARTS AT A SPELLED OUT NUMBER
       *> AND PUT IT IN PARSE-RET
        PARSE-WORD.
-       EVALUATE IN-RECORD(PTR:3)
-         WHEN "one"
-           ADD 1 TO ZERO GIVING PARSE-RET
-         WHEN "two"
-           ADD 2 TO ZERO GIVING PARSE-RET
-         WHEN "thr"
-           ADD 3 TO PTR
-           IF IN-RECORD(PTR:2) = "ee"
-             ADD 3 TO ZERO GIVING PARSE-RET
-           END-IF
-           SUBTRACT 3 FROM PTR
-         WHEN "fou"
-           ADD 3 TO PTR
-           IF IN-RECORD(PTR:1) = "r"
-             ADD 4 TO ZERO GIVING PARSE-RET
-           END-IF
-           SUBTRACT 3 FROM PTR
-         WHEN "fiv"
-           ADD 3 TO PTR
-           IF IN-RECORD(PTR:1) = "e"
-             ADD 5 TO ZERO GIVING PARSE-RET
-           END-IF
-           SUBTRACT 3 FROM PTR
-         WHEN "six"
-           ADD 6 TO ZERO GIVING PARSE-RET
-         WHEN "sev"
-           ADD 3 TO PTR
-           IF IN-RECORD(PTR:2) = "en"
-             ADD 7 TO ZERO GIVING PARSE-RET
-           END-IF
-           SUBTRACT 3 FROM PTR
-         WHEN "eig"
-           ADD 3 TO PTR
-           IF IN-RECORD(PTR:2) = "ht"
-             ADD 8 TO ZERO GIVING PARSE-RET
-           END-IF
-           SUBTRACT 3 FROM PTR
-         WHEN "nin"
-           ADD 3 TO PTR
-           IF IN-RECORD(PTR:1) = "e"
-             ADD 9 TO ZERO GIVING PARSE-RET
-           END-IF
-           SUBTRACT 3 FROM PTR
-       END-EVALUATE
+           EVALUATE IN-RECORD(PTR:3)
+             WHEN "one"
+               ADD 1 TO ZERO GIVING PARSE-RET
+             WHEN "two"
+               ADD 2 TO ZERO GIVING PARSE-RET
+             WHEN "thr"
+               ADD 3 TO PTR
+               IF IN-RECORD(PTR:2) = "ee"
+                 ADD 3 TO ZERO GIVING PARSE-RET
+               END-IF
+               SUBTRACT 3 FROM PTR
+             WHEN "fou"
+               ADD 3 TO PTR
+               IF IN-RECORD(PTR:1) = "r"
+                 ADD 4 TO ZERO GIVING PARSE-RET
+               END-IF
+               SUBTRACT 3 FROM PTR
+             WHEN "fiv"
+               ADD 3 TO PTR
+               IF IN-RECORD(PTR:1) = "e"
+                 ADD 5 TO ZERO GIVING PARSE-RET
+               END-IF
+               SUBTRACT 3 FROM PTR
+             WHEN "six"
+               ADD 6 TO ZERO GIVING PARSE-RET
+             WHEN "sev"
+               ADD 3 TO PTR
+               IF IN-RECORD(PTR:2) = "en"
+                 ADD 7 TO ZERO GIVING PARSE-RET
+               END-IF
+               SUBTRACT 3 FROM PTR
+             WHEN "eig"
+               ADD 3 TO PTR
+               IF IN-RECORD(PTR:2) = "ht"
+                 ADD 8 TO ZERO GIVING PARSE-RET
+               END-IF
+               SUBTRACT 3 FROM PTR
+             WHEN "nin"
+               ADD 3 TO PTR
+               IF IN-RECORD(PTR:1) = "e"
+                 ADD 9 TO ZERO GIVING PARSE-RET
+               END-IF
+               SUBTRACT 3 FROM PTR
+           END-EVALUATE
        .
        END PROGRAM DAY1B.

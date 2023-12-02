@@ -44,16 +44,16 @@
        77  REC-CHAR-CTR        PIC 9(3).
        PROCEDURE DIVISION.
 
-       OPEN INPUT IN-FILE.
-       IF ECODE NOT = 0
-         DISPLAY "ERROR OPENING FILE: " ECODE
-       END-IF
-       PERFORM PROCESS-LINE UNTIL ECODE = 10.
-       CLOSE IN-FILE.
+           OPEN INPUT IN-FILE.
+           IF ECODE NOT = 0
+             DISPLAY "ERROR OPENING FILE: " ECODE
+           END-IF
+           PERFORM PROCESS-LINE UNTIL ECODE = 10.
+           CLOSE IN-FILE.
 
-       DISPLAY "TOTAL: " TOTAL.
+           DISPLAY "TOTAL: " TOTAL.
 
-       GOBACK.
+           GOBACK.
 
       *> PROCESS ONE LINE OF INPUT
        PROCESS-LINE.

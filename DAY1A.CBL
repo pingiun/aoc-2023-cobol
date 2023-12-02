@@ -37,13 +37,13 @@
        LINKAGE SECTION.
        PROCEDURE DIVISION.
 
-       OPEN INPUT IN-FILE.
-       PERFORM PROCESS-LINE UNTIL ECODE = 10.
-       CLOSE IN-FILE.
+           OPEN INPUT IN-FILE.
+           PERFORM PROCESS-LINE UNTIL ECODE = 10.
+           CLOSE IN-FILE.
 
-       DISPLAY TOTAL.
+           DISPLAY TOTAL.
 
-       GOBACK.
+           GOBACK.
 
       *> PROCESS ONE LINE AND ADD TO THE RUNNING TOTAL
        PROCESS-LINE.
@@ -61,14 +61,14 @@
        .
       *> PROCESS ONE CHARACTER
        PROCESS-CHAR.
-       IF IN-RECORD(PTR:1) IS NUMERIC
-           IF HAVE-FIRST = 'N'
-             MOVE IN-RECORD(PTR:1) TO FIRST-NUMBER
-             MOVE IN-RECORD(PTR:1) TO SECOND-NUMBER
-             MOVE 'Y' TO HAVE-FIRST
-           ELSE
-             MOVE IN-RECORD(PTR:1) TO SECOND-NUMBER
+           IF IN-RECORD(PTR:1) IS NUMERIC
+             IF HAVE-FIRST = 'N'
+               MOVE IN-RECORD(PTR:1) TO FIRST-NUMBER
+               MOVE IN-RECORD(PTR:1) TO SECOND-NUMBER
+               MOVE 'Y' TO HAVE-FIRST
+             ELSE
+               MOVE IN-RECORD(PTR:1) TO SECOND-NUMBER
+             END-IF
            END-IF
-       END-IF
        .
        END PROGRAM DAY1A.
